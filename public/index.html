@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Twitter — Sign In</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="logo">𝕏</div>
+      <h1>Join the conversation</h1>
+
+      <div class="tab-row">
+        <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">Sign In</button>
+        <button class="tab-btn" id="tab-register" onclick="switchTab('register')">Register</button>
+      </div>
+
+      <p class="error-msg" id="error-msg"></p>
+
+      <form id="auth-form" onsubmit="handleSubmit(event)">
+        <div class="field">
+          <label for="username">Username</label>
+          <input id="username" type="text" placeholder="yourname" autocomplete="username" required />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" required />
+        </div>
+        <button class="btn btn-primary btn-full" type="submit" id="submit-btn">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if (getToken()) window.location.href = '/home.html';
+
+    let mode = 'login';
+
+    function switchTab(t) {
+      mode = t;
+      document.getElementById('tab-login').classList.toggle('active', t === 'login');
+      document.getElementById('tab-register').classList.toggle('active', t === 'register');
+      document.getElementById('submit-btn').textContent = t === 'login' ? 'Sign In' : 'Create Account';
+      document.getElementById('error-msg').textContent = '';
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const errEl = document.getElementById('error-msg');
+      errEl.textContent = '';
+      try {
+        const data = await apiFetch(`/${mode}`, {
+          method: 'POST',
+          body: JSON.stringify({ username, password }),
+        });
+        setAuth(data.token, data.user);
+        window.location.href = '/home.html';
+      } catch (err) {
+        errEl.textContent = err.message;
+      }
+    }
+  </script>
+</body>
+
+</html>

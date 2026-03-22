@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Messages — Twitter</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <div class="shell">
+        <nav class="sidebar">
+            <div class="logo">𝕏</div>
+            <a href="/home.html" class="nav-item"><span class="nav-icon">🏠</span> Home</a>
+            <a href="/messages.html" class="nav-item active"><span class="nav-icon">✉️</span> Messages</a>
+            <div class="sidebar-footer">
+                <div class="user-chip" onclick="logout()">
+                    <div class="avatar" id="sidebar-avatar">?</div>
+                    <div class="user-info">
+                        <div class="user-name" id="sidebar-name">—</div>
+                        <div class="user-handle">Sign out</div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main">
+            <div class="page-header">Messages</div>
+            <div class="msg-layout">
+
+                <div class="msg-sidebar">
+                    <div class="msg-sidebar-header">Conversations</div>
+                    <div id="user-list">
+                        <div class="loading">Loading…</div>
+                    </div>
+                </div>
+
+                <div class="msg-main" id="thread-panel">
+                    <div class="msg-empty" id="thread-empty">Select a conversation</div>
+                    <div class="msg-header hidden" id="thread-header"></div>
+                    <div class="msg-thread hidden" id="thread-msgs"></div>
+                    <div class="msg-input-row hidden" id="thread-input-row">
+                        <input id="msg-input" type="text" placeholder="Write a message…" maxlength="500"
+                            onkeydown="if(event.key==='Enter') sendMessage()" />
+                        <button class="btn btn-primary btn-sm" onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="messages.js"></script>
+</body>
+
+</html>

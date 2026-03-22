@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home — Twitter</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <div class="shell">
+        <nav class="sidebar">
+            <div class="logo">𝕏</div>
+            <a href="/home.html" class="nav-item active"><span class="nav-icon">🏠</span> Home</a>
+            <a href="/messages.html" class="nav-item"><span class="nav-icon">✉️</span> Messages</a>
+            <div class="sidebar-footer">
+                <div class="user-chip" onclick="logout()">
+                    <div class="avatar" id="sidebar-avatar">?</div>
+                    <div class="user-info">
+                        <div class="user-name" id="sidebar-name">—</div>
+                        <div class="user-handle">Sign out</div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main">
+            <div class="page-header">Home</div>
+
+            <div class="compose">
+                <div class="avatar" id="compose-avatar">?</div>
+                <div style="flex:1">
+                    <textarea id="compose-input" placeholder="What's happening?" maxlength="280"
+                        oninput="updateChar()"></textarea>
+                    <div class="compose-footer">
+                        <span class="char-count" id="char-count">280</span>
+                        <button class="btn btn-primary btn-sm" onclick="submitPost()">Post</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="feed">
+                <div class="loading">Loading…</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Quote Modal -->
+    <div class="overlay" id="quote-overlay">
+        <div class="modal">
+            <button class="close-btn" onclick="closeQuote()">✕</button>
+            <h2>Quote Post</h2>
+            <textarea id="quote-input" placeholder="Add your comment…" maxlength="280"></textarea>
+            <div class="modal-preview">
+                <div class="preview-author" id="qp-author"></div>
+                <div class="preview-text" id="qp-content"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost btn-sm" onclick="closeQuote()">Cancel</button>
+                <button class="btn btn-primary btn-sm" onclick="submitQuote()">Quote</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="home.js"></script>
+</body>
+
+</html>
