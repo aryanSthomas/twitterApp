@@ -1,6 +1,7 @@
 // ── Shared utilities across all pages ─────────────────────────────────────────
 
-const API = 'http://localhost:3000/api';
+// Use the live Render URL for the backend API
+const API = 'https://twitterapp-u0fk.onrender.com/api';
 
 function getToken() { return localStorage.getItem('token'); }
 function getUser() { return JSON.parse(localStorage.getItem('user') || 'null'); }
